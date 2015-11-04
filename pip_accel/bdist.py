@@ -74,9 +74,10 @@ class BinaryDistributionManager(object):
         packages were installed.
         """
         cache_file = self.cache.get(requirement)
-        if cache_file and requirement.last_modified > os.path.getmtime(cache_file):
-            logger.info("Invalidating old %s binary (source is newer) ..", requirement)
-            cache_file = None
+        # TODO Invalidating cached file does not work on Appveyor and external storage.
+        #if cache_file and requirement.last_modified > os.path.getmtime(cache_file):
+            #logger.info("Invalidating old %s binary (source is newer) ..", requirement)
+            #cache_file = None
         if not cache_file:
             logger.debug("%s hasn't been cached yet, doing so now.", requirement)
             # Build the binary distribution.
